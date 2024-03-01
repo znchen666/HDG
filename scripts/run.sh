@@ -4,17 +4,13 @@ class_space_num=${#is_different_class_space[@]}
 is_data_aug=yes
 loader_name='daml_loader'
 dataset='office-home'
-data_dir='/data0/czn/longtail_workspace/multi-domain-imbalance/data/office_home/OfficeHome/'
+data_dir='/Path/To/Dataset/'
 
 #dataset='PACS'
-#data_dir='/data0/czn/longtail_workspace/multi-domain-imbalance/data/PACS/PACS/'
-
-#dataset='MultiDataSet'
-#d_path='/data0/czn/longtail_workspace/multi-domain-imbalance/data/'
-#data_dir='/data0/czn/longtail_workspace/multi-domain-imbalance/data/'
+#data_dir='/Path/To/Dataset/'
 
 #dataset='DomainNet'
-#data_dir='/data0/czn/longtail_workspace/multi-domain-imbalance/data/DomainNet/'
+#data_dir='/Path/To/Dataset/'
 
 algorithms=('SCIPD')
 algorithm_num=${#algorithms[@]}
