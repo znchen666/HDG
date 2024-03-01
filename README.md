@@ -28,8 +28,10 @@ Path/To/Dataset
       ├── cat
       ├── ......
 ├── image_list
-      ├── train.txt
-      ├── val.txt
+      ├── Domain1_train.txt
+      ├── Domain1_val.txt
+      ├── Domain1_test.txt (optional)
+      ├── ......
 ```
 Modify the file path in the scripts.
 
