@@ -25,7 +25,7 @@ task='img_dg'
 lr=1e-3
 test_envs=0 # modify 1, 2, 3
 gpu_id=0
-max_epoch=1
+max_epoch=50
 steps_per_epoch=100
 domain_num=4
 
