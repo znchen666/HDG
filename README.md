@@ -16,16 +16,16 @@ Arrange data with the following structure:
 ```
 Path/To/Dataset
 ├── Domain1
-      ├── class
+      ├── cat
       ├── ......
 ├── Domain2
-      ├── class
+      ├── cat
       ├── ......
 ├── Domain3
-      ├── class
+      ├── cat
       ├── ......
 ├── Domain4
-      ├── class
+      ├── cat
       ├── ......
 ├── image_list
       ├── train.txt
