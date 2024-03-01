@@ -31,10 +31,6 @@ class CLIPBase(Algorithm):
         self.classifier = common_network.feat_classifier(
             args.num_classes, self.featurizer.in_features, args.classifier
         )
-        # self.linear_project = common_network.feat_classifier(512, self.featurizer.in_features, args.classifier)
-        # self.domain_classifier = common_network.feat_classifier(
-        #     args.domain_num - 1, self.featurizer.in_features, args.classifier
-        # )
         self.args = args
         self.device = torch.device(f'cuda:{self.args.gpu_id}' if torch.cuda.is_available() else 'cpu')
         # self.model, _ = clip.load('RN50', self.device)
@@ -43,12 +39,6 @@ class CLIPBase(Algorithm):
         # self.model, _ = clip.load('RN101', self.device)
         self.bz = args.batch_size
         self.num_classes = args.num_classes
-        # known_classnames = ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house']
-        # known_classnames = ['back_pack', 'bike', 'bike_helmet', 'bookcase', 'bottle', 'calculator', 'desk_chair', 'desk_lamp', 'desktop_computer',
-        #                     'file_cabinet', 'headphones', 'keyboard', 'laptop_computer', 'letter_tray',
-        #                     'mobile_phone', 'monitor', 'mouse', 'mug', 'paper_notebook', 'pen', 'phone', 'printer', 'projector', 'punchers',
-        #                     'ring_binder', 'ruler', 'scissors', 'speaker', 'stapler', 'tape_dispenser', 'trash_can', 'airplane', 'bus', 'car', 'horse', 'knife',
-        #                     'motorcycle', 'person', 'plant', 'skateboard', 'train', 'truck', 'bird', 'cat', 'deer', 'dog', 'monkey', 'ship']
 
     def torch_cosine_similarity(self, features1, features2):
         norm1 = torch.norm(features1, dim=-1).reshape(features1.shape[0], 1)
@@ -74,12 +64,6 @@ class CLIPBase(Algorithm):
         # original
         opt.zero_grad()
 
-        # CLIP initialization
-        # known_classnames = ['back_pack', 'bike', 'bike_helmet', 'bookcase', 'bottle', 'calculator', 'desk_chair', 'desk_lamp', 'desktop_computer',
-        #                     'file_cabinet', 'headphones', 'keyboard', 'laptop_computer', 'letter_tray',
-        #                     'mobile_phone', 'monitor', 'mouse', 'mug', 'paper_notebook', 'pen', 'phone', 'printer', 'projector', 'punchers',
-        #                     'ring_binder', 'ruler', 'scissors', 'speaker', 'stapler', 'tape_dispenser', 'trash_can', 'airplane', 'bus', 'car', 'horse', 'knife',
-        #                     'motorcycle', 'person', 'plant', 'skateboard', 'train', 'truck', 'bird', 'cat', 'deer', 'dog', 'monkey', 'ship']
 
         # known_classnames = ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house']
         known_classnames = ['Drill', 'Exit_Sign', 'Bottle', 'Glasses', 'Computer', 'File_Cabinet', 'Shelf', 'Toys', 'Sink',
@@ -170,18 +154,6 @@ class CLIPBase(Algorithm):
                'Fan', 'Ruler', 'Pan', 'Screwdriver', 'Trash_Can', 'Printer', 'Speaker', 'Eraser', 'Bucket', 'Chair',
                'Calendar', 'Calculator', 'Flowers', 'Lamp_Shade', 'Spoon', 'Candles']
         text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in known_classnames]).to(self.device)
-        image_features = self.model.encode_image(x)
-        text_features = self.model.encode_text(text_inputs)
-        image_features /= image_features.norm(dim=-1, keepdim=True)
-        text_features /= text_features.norm(dim=-1, keepdim=True)
-        similarity = (100 * image_features @ text_features.T).softmax(dim=-1)
-        return similarity
-
-
-    def domain_ability_test(self, x):
-        # known_classnames = ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house']
-        known_domainnames = ['Art', 'Clipart', 'Product', 'Real_World']
-        text_inputs = torch.cat([clip.tokenize(f"a photo from {c}") for c in known_domainnames]).to(self.device)
         image_features = self.model.encode_image(x)
         text_features = self.model.encode_text(text_inputs)
         image_features /= image_features.norm(dim=-1, keepdim=True)
