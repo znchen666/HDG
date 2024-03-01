@@ -1,56 +1,44 @@
-# HDG
+## [CVPR2024] PracticalDG: Perturbation Distillation on Vision-Language Models for Hybrid Domain Generalization
+[Link to our paper](www.baidu.com)
+![image](https://github.com/znchen666/HDG/assets/95161725/327a2f38-a96f-4019-ad2f-2a570c8c6ea8)
 
-## Paper
+## Requirements
 ```
-"PracticalDG: Perturbation Distillation on Vision-Language Models for Hybrid Domain Generalization", CVPR 2024
+Python 3.7.11+
+Pytorch 1.8.0+
 ```
-
-## Directory
-```
-.
-├── alg
-├── dalib
-├── datautil
-├── eval.py
-├── eval_hscore.py
-├── network
-├── scripts
-├── train.py
-└── utils
-```
-- __alg__
-  - Implements for each algorithm, including basic DG algorithms and our SCI-PD.
-- __dalib__
-  -  Implements for datasets such as PACS, Office-Home.
-- __datautil__
-  - Implements loading and preprocessing datasets.
-- __eval_hscore.py__
-  - Implements H-score of the algorithm after training.
-- __eval.py__
-  - Implements Accuracy of the algorithm after training.
-- __network__
-  - Implements algorithm networks.
-- __scripts__
-  - Scripts to conduct experiments.
-- __train.py__
-  - Implements training for each algorithm. This code is used in common with the algorithms.
-- __utils__
-  - Implementation of evaluation metrics and functions used for getter function and DAML.
-
-## Requirement
-```
-Python 3.7.11
-Pytorch 1.8.0
-```
-
 
 ## Data Preparation
-Prepare the dataset (PACS, Office-Home and DomainNet) and modify the file path in the scripts.
+Download the dataset PACS, OfficeHome and DomainNet.
+
+Arrange data with the following structure:
+```
+Path/To/Dataset
+├── Domain1
+      ├── class
+      ├── ......
+├── Domain2
+      ├── class
+      ├── ......
+├── Domain3
+      ├── class
+      ├── ......
+├── Domain4
+      ├── class
+      ├── ......
+├── image_list
+      ├── train.txt
+      ├── val.txt
+```
+Modify the file path in the scripts.
 
 ## Train and inference
-The main script files are `train.py`, `eval.py`, and `eval_hscore.py`, which can be runned by using `bash scripts/run.sh`.
+For the training and inference process, please simply execute:
+```
+bash scripts/run.sh
+```
 
 ## Acknowledgment
-Thanks to OpenDG-Eval. We modify their code to implement Hybrid Domain Generalization.
+We thank the authors from OpenDG-Eval for referencing on [OpenDG-Eval](https://github.com/shiralab/OpenDG-Eval). We modify their code to implement Hybrid Domain Generalization.
 
 ## Citation
