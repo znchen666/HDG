@@ -38,6 +38,7 @@ For the training and inference process, please simply execute:
 ```
 bash scripts/run.sh
 ```
+Change different test_envs 0,1,2,3 to conduct leave-one-domain-out protocol.
 
 ## Acknowledgment
 We thank the authors from OpenDG-Eval for referencing on [OpenDG-Eval](https://github.com/shiralab/OpenDG-Eval). We modify their code to implement Hybrid Domain Generalization.
