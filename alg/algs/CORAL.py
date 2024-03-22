@@ -9,22 +9,6 @@ class CORAL(ERM):
         super(CORAL, self).__init__(args)
         self.args = args
         self.kernel_type = "mean_cov"
-        trained_model_path = r'/data0/czn/longtail_workspace/OpenDG-Eval/output/daml_loader/lr_1e-3_dataaug_yes/office-home_different_class_space/Clip/test_envs_1/seed_0_clipvitb16_cedistill_featsdistill0.2_earlystop10/' \
-                             r'best_acc_model_and_args_epoch10.pkl'
-        self.dg_pretrained_model = torch.load(trained_model_path, map_location=torch.device('cuda:4'))
-        self.new_state_dict = self.fix_state_dict(self.dg_pretrained_model)
-        self.featurizer.load_state_dict(self.new_state_dict, strict=False)
-        # self.register_buffer("proto_feats", torch.zeros((args.num_classes, self.featurizer.in_features), requires_grad=False))
-
-    def fix_state_dict(self, pretrained_model):
-        state_dict = pretrained_model['model_dict']
-        for name, values in state_dict.copy().items():
-            new_name = name.split('.')
-            new_name = new_name[1:]
-            new_name = '.'.join(new_name)
-            state_dict[new_name] = values
-            del state_dict[name]
-        return state_dict
 
     def coral(self, x, y):
         mean_x = x.mean(0, keepdim=True)
