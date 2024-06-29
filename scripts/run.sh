@@ -25,7 +25,6 @@ max_epoch=50
 steps_per_epoch=100
 domain_num=4
 
-# 目前是用的没有CP的优化器，注意后面调整时要修改过来
 for ((seed=0; seed < 3; seed++)); do
     for ((i=0; i < $algorithm_num; i++)); do
         for ((j=0; j < $class_space_num; j++)); do
