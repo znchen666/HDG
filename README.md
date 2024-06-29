@@ -28,10 +28,7 @@ Path/To/Dataset
       ├── cat
       ├── ......
 ├── image_list
-      ├── Domain1_train.txt
-      ├── Domain1_val.txt
-      ├── Domain1_test.txt (optional)
-      ├── ......
+      List for each dataset is provided in ./image_list 
 ```
 Modify the file path in the scripts.
 
