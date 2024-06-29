@@ -18,7 +18,7 @@ class ERM(Algorithm):
     def __init__(self, args):
         super(ERM, self).__init__(args)
         self.featurizer = get_fea(args)  # .to(self.device)
-        self.classifier = common_network.feat_classifier_new(
+        self.classifier = common_network.feat_classifier(
             args.num_classes, self.featurizer.in_features, args.classifier
         )  # .to(self.device)
 
