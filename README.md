@@ -46,6 +46,7 @@ Change `test_envs` to different values (e.g., 0,1,2,3) to conduct leave-one-doma
 We thank the authors from OpenDG-Eval for referencing on [OpenDG-Eval](https://github.com/shiralab/OpenDG-Eval). We modify their code to implement Hybrid Domain Generalization.
 
 ## Citation
+```
 @inproceedings{chen2024practicaldg,
   title={PracticalDG: Perturbation Distillation on Vision-Language Models for Hybrid Domain Generalization},
   author={Chen, Zining and Wang, Weiqiu and Zhao, Zhicheng and Su, Fei and Men, Aidong and Meng, Hongying},
@@ -53,3 +54,4 @@ We thank the authors from OpenDG-Eval for referencing on [OpenDG-Eval](https://g
   pages={23501--23511},
   year={2024}
 }
+```
