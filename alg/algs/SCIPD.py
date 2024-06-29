@@ -31,10 +31,6 @@ class SCIPD(Algorithm):
         self.classifier = common_network.feat_classifier_new(
             args.num_classes, self.featurizer.in_features, args.classifier
         )
-        # self.linear_project = common_network.feat_classifier(512, self.featurizer.in_features, args.classifier)
-        # self.domain_classifier = common_network.feat_classifier(
-        #     args.domain_num - 1, self.featurizer.in_features, args.classifier
-        # )
         self.args = args
         self.device = torch.device(f'cuda:{self.args.gpu_id}' if torch.cuda.is_available() else 'cpu')
         # self.model, _ = clip.load('RN50', self.device)
@@ -122,29 +118,19 @@ class SCIPD(Algorithm):
         all_domain = torch.cat([data[2].to(self.device).long() for data in minibatches])
         thresh = self.args.test_envs[0]
         all_domain = torch.tensor([x.item() - 1 if x > thresh else x.item() for x in all_domain]).to(self.device)
-        # original
-        # opt.zero_grad()
-        # optimizer set
-        # sch[0].step()
-        # sch[1].step()
-        # sch[2].step()
 
         net_opt = opt[0]
         cls_opt = opt[1]
-        # dcls_opt = opt[2]
 
         net_opt.zero_grad()
         cls_opt.zero_grad()
-        # dcls_opt.zero_grad()
 
         # CLIP initialization
-        # known_classnames = ['back_pack', 'bike', 'bike_helmet', 'bookcase', 'bottle', 'calculator', 'desk_chair', 'desk_lamp', 'desktop_computer',
-        #                     'file_cabinet', 'headphones', 'keyboard', 'laptop_computer', 'letter_tray',
-        #                     'mobile_phone', 'monitor', 'mouse', 'mug', 'paper_notebook', 'pen', 'phone', 'printer', 'projector', 'punchers',
-        #                     'ring_binder', 'ruler', 'scissors', 'speaker', 'stapler', 'tape_dispenser', 'trash_can', 'airplane', 'bus', 'car', 'horse', 'knife',
-        #                     'motorcycle', 'person', 'plant', 'skateboard', 'train', 'truck', 'bird', 'cat', 'deer', 'dog', 'monkey', 'ship']
 
+        # PACS
         # known_classnames = ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house']
+
+        # DomainNet
         # known_classnames = ['aircraft_carrier', 'airplane', 'alarm_clock', 'ambulance', 'angel', 'animal_migration', 'ant', 'anvil',
         #  'apple', 'arm', 'asparagus', 'axe', 'backpack', 'banana', 'bandage', 'barn', 'baseball', 'baseball_bat',
         #  'basket', 'basketball', 'bat', 'bathtub', 'beach', 'bear', 'beard', 'bed', 'bee', 'belt', 'bench', 'bicycle',
@@ -182,6 +168,8 @@ class SCIPD(Algorithm):
         #  'truck', 'trumpet', 't-shirt', 'umbrella', 'underwear', 'van', 'vase', 'violin', 'washing_machine',
         #  'watermelon', 'waterslide', 'whale', 'wheel', 'windmill', 'wine_bottle', 'wine_glass', 'wristwatch', 'yoga',
         #  'zebra', 'zigzag']
+
+        # OfficeHome
         known_classnames = ['Drill', 'Exit_Sign', 'Bottle', 'Glasses', 'Computer', 'File_Cabinet', 'Shelf', 'Toys', 'Sink',
                'Laptop', 'Kettle', 'Folder', 'Keyboard', 'Flipflops', 'Pencil', 'Bed', 'Hammer', 'ToothBrush', 'Couch',
                'Bike', 'Postit_Notes', 'Mug', 'Webcam', 'Desk_Lamp', 'Telephone', 'Helmet', 'Mouse', 'Pen', 'Monitor',
@@ -207,13 +195,12 @@ class SCIPD(Algorithm):
         # sample selection standard
         weight_ori = torch.max(similarity, dim=1)[0]
         weight_inverse = 1 / torch.pow(weight_ori, self.args.hyper1)
-        # weight_square_inverse = 1 / torch.pow(weight_ori, 2)
 
         # feature output
         features = self.featurizer(all_x)
         # features = self.featurizer(all_x, ret_feats=False)
 
-        # # fix wrong samples
+        # fix wrong samples
         class_logits = self.classifier(features)
 
         predict_label = torch.argmax(similarity, dim=1)
@@ -253,14 +240,6 @@ class SCIPD(Algorithm):
 
         return {"class": class_loss.item(),
                 "contra": contrastive_loss.item(),
-                # "fixed" : fixed_loss.item(),
-                # "xded": xded_loss.item(),
-                # "fd" : fd_loss.item(),
-                # "crd": crd_loss.item(),
-                # "kl": kl_loss.item(),
-                # "domain": domain_loss.item(),
-                # "ent": ent_loss.item()
-                # "align": feats_align_loss.item()
                 }
 
 
