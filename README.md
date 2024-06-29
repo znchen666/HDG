@@ -1,5 +1,5 @@
 ## [CVPR2024] PracticalDG: Perturbation Distillation on Vision-Language Models for Hybrid Domain Generalization
-[Link to our paper](www.baidu.com)
+[Link to our paper][(https://openaccess.thecvf.com/content/CVPR2024/papers/Chen_PracticalDG_Perturbation_Distillation_on_Vision-Language_Models_for_Hybrid_Domain_Generalization_CVPR_2024_paper.pdf)]
 ![image](https://github.com/znchen666/HDG/assets/95161725/327a2f38-a96f-4019-ad2f-2a570c8c6ea8)
 
 
