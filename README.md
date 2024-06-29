@@ -40,7 +40,7 @@ bash scripts/run.sh
 Change `test_envs` to different values (e.g., 0,1,2,3) to conduct leave-one-domain-out protocol.
 
 ## Acknowledgment
-We thank the authors from OpenDG-Eval for referencing on [OpenDG-Eval](https://github.com/shiralab/OpenDG-Eval). We modify their code to implement Hybrid Domain Generalization.
+We thank the authors from [OpenDG-Eval](https://github.com/shiralab/OpenDG-Eval) for reference. We modify their code to implement Hybrid Domain Generalization.
 
 ## Citation
 ```
