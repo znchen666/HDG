@@ -16,58 +16,31 @@ class DomainNet(ImageList):
     def __init__(self, root, task, filter_class, split='all', **kwargs):
         if split == 'all':
             self.image_list = {
-                "C": "balance_image_list/Clipart_test.txt",
-                "I": "balance_image_list/Infograph_test.txt",
-                "P": "balance_image_list/Painting_test.txt",
-                "Q": "balance_image_list/Quickdraw_test.txt",
-                "R": "balance_image_list/Real_test.txt",
-                "S": "balance_image_list/Sketch_test.txt",
+                "C": "image_list/Clipart_test.txt",
+                "I": "image_list/Infograph_test.txt",
+                "P": "image_list/Painting_test.txt",
+                "Q": "image_list/Quickdraw_test.txt",
+                "R": "image_list/Real_test.txt",
+                "S": "image_list/Sketch_test.txt",
             }
         elif split == 'train':
             self.image_list = {
-                "C": "balance_image_list/Clipart_train.txt",
-                "I": "balance_image_list/Infograph_train.txt",
-                "P": "balance_image_list/Painting_train.txt",
-                "Q": "balance_image_list/Quickdraw_train.txt",
-                "R": "balance_image_list/Real_train.txt",
-                "S": "balance_image_list/Sketch_train.txt",
+                "C": "image_list/Clipart_train.txt",
+                "I": "image_list/Infograph_train.txt",
+                "P": "image_list/Painting_train.txt",
+                "Q": "image_list/Quickdraw_train.txt",
+                "R": "image_list/Real_train.txt",
+                "S": "image_list/Sketch_train.txt",
             }
         elif split == 'val':
             self.image_list = {
-                "C": "balance_image_list/Clipart_val.txt",
-                "I": "balance_image_list/Infograph_val.txt",
-                "P": "balance_image_list/Painting_val.txt",
-                "Q": "balance_image_list/Quickdraw_val.txt",
-                "R": "balance_image_list/Real_val.txt",
-                "S": "balance_image_list/Sketch_val.txt",
+                "C": "image_list/Clipart_val.txt",
+                "I": "image_list/Infograph_val.txt",
+                "P": "image_list/Painting_val.txt",
+                "Q": "image_list/Quickdraw_val.txt",
+                "R": "image_list/Real_val.txt",
+                "S": "image_list/Sketch_val.txt",
             }
-        # if split == 'all':
-        #     self.image_list = {
-        #         "C": "image_list/Clipart_test.txt",
-        #         "I": "image_list/Infograph_test.txt",
-        #         "P": "image_list/Painting_test.txt",
-        #         "Q": "image_list/Quickdraw_test.txt",
-        #         "R": "image_list/Real_test.txt",
-        #         "S": "image_list/Sketch_test.txt",
-        #     }
-        # elif split == 'train':
-        #     self.image_list = {
-        #         "C": "image_list/Clipart_train.txt",
-        #         "I": "image_list/Infograph_train.txt",
-        #         "P": "image_list/Painting_train.txt",
-        #         "Q": "image_list/Quickdraw_train.txt",
-        #         "R": "image_list/Real_train.txt",
-        #         "S": "image_list/Sketch_train.txt",
-        #     }
-        # elif split == 'val':
-        #     self.image_list = {
-        #         "C": "image_list/Clipart_val.txt",
-        #         "I": "image_list/Infograph_val.txt",
-        #         "P": "image_list/Painting_val.txt",
-        #         "Q": "image_list/Quickdraw_val.txt",
-        #         "R": "image_list/Real_val.txt",
-        #         "S": "image_list/Sketch_val.txt",
-        #     }
 
         assert task in self.image_list
         data_list_file = os.path.join(root, self.image_list[task])
