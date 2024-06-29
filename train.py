@@ -260,17 +260,10 @@ if __name__ == "__main__":
     sss = time.time()
     for epoch in range(args.max_epoch):
         for iter_num in range(args.steps_per_epoch):
-            # minibatches_device[i]: minibatch of domain i (i=0,1,2)
-            #### minibatches_device[i][0]: x
-            #### minibatches_device[i][1]: y_label
-            #### minibatches_device[i][2]: domain_label (equal to i regardless of test_envs)
             minibatches_device = [(data) for data in next(train_minibatches_iterator)]
             if args.algorithm == "VREx" and algorithm.update_count == args.anneal_iters:
                 opt = get_optimizer(algorithm, args)
                 sch = get_scheduler(opt, args)
-            # elif "Division" in args.algorithm or "Clip111" == args.algorithm:
-            #     opt = get_optimizer(algorithm, args)
-            #     opt = [opt_net, opt_cls, opt_dcls]
             elif "Clip_finetune" == args.algorithm:
                 opt_cls = get_optimizer(algorithm, args)
                 opt = opt_cls
@@ -315,45 +308,6 @@ if __name__ == "__main__":
             for item in acc_type_list:
                 if item == "train":
                     continue
-                # if args.dataset == "MultiDataSet":
-                #     if item == "target":
-                #         acc_record[item] = np.array(
-                #                 [
-                #                     modelopera.accuracy(
-                #                         algorithm,
-                #                         eval_loaders[i],
-                #                         item,
-                #                         known_classes_set,
-                #                         unknown_classes_set,
-                #                         args.gpu_id,
-                #                     )
-                #                     for i in eval_name_dict[item]
-                #                 ]
-                #             )
-                #         s += item + "1_acc:%.4f," % acc_record[item][0]
-                #         s += item + "2_acc:%.4f," % acc_record[item][1]
-                #         s += item + "3_acc:%.4f," % acc_record[item][2]
-                #         s += item + "4_acc:%.4f," % acc_record[item][3]
-                #     else:
-                #         if item == "train":
-                #             continue
-                #         acc_record[item] = np.mean(
-                #             np.array(
-                #                 [
-                #                     modelopera.accuracy(
-                #                         algorithm,
-                #                         eval_loaders[i],
-                #                         item,
-                #                         known_classes_set,
-                #                         unknown_classes_set,
-                #                         args.gpu_id,
-                #                     )
-                #                     for i in eval_name_dict[item]
-                #                 ]
-                #             )
-                #         )
-                #         s += item + "_acc:%.4f," % acc_record[item]
-                # else:
                 acc_record[item] = np.mean(
                     np.array(
                         [
@@ -380,35 +334,6 @@ if __name__ == "__main__":
             )
 
             s += 'target' + "_auroc:%.4f," % target_auroc
-
-            # h_scores = []
-            # if args.dataset != 'MultiDataSet':
-            #     filename = args.output + f"/eval/threshold_range_list"
-            # else:
-            #     filename = args.output + f"/eval_{args.t_domain}/threshold_range_list"
-            #
-            # if os.path.exists(filename):
-            #     threshold_range_list = pickle_load(filename)
-            # else:
-            #     threshold_range_list = modelopera.get_thresholds(
-            #         algorithm, eval_loaders[eval_name_dict['target'][0]], args.gpu_id
-            #     )
-            #     pickle_dump(threshold_range_list, filename)
-            #
-            # for thd in threshold_range_list:
-            #     h_scores.append(
-            #         modelopera.h_score(
-            #             algorithm,
-            #             eval_loaders[eval_name_dict['target'][0]],
-            #             'target',
-            #             known_classes_set,
-            #             unknown_classes_set,
-            #             args.gpu_id,
-            #             thd,
-            #         )
-            #     )
-            # max_target_hscore = max(h_scores)
-            # s += 'target' + "_h_score:%.4f," % max_target_hscore
 
             print(s[:-1])
             if acc_record["valid"] >= best_valid_acc:
